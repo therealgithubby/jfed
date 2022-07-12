@@ -1,0 +1,49 @@
+<html>
+   <head>
+      <meta content = "text/html; charset = ISO-8859-1" http-equiv = "content-type">
+		
+      <script type = "application/javascript">
+$(function() {  
+  $('#clickme').click(function() {
+       $.ajax({
+       url: 'https://bitbucket.org/dacsoftware/recruitment-frontend-junior/src/master/data.json',
+       dataType: 'json',
+       success: function(data) {
+          var items = [];
+
+          $.each(data, function(key, val) {
+
+            items.push('<li id="' + key + '">' + val + '</li>');    
+
+          });
+
+          $('<ul/>', {
+             'class': 'interest-list',
+             html: items.join('')
+          }).appendTo('body');
+
+       },
+      statusCode: {
+         404: function() {
+           alert('There was a problem with the server.  Try again soon!');
+         }
+       }
+    });
+  });
+});
+
+   	
+      </script>
+	
+      <title>Junior Recruitment FrontEnd Assesment</title>
+   </head>
+	
+   <body>
+      <h1 id="title">19. Using jQuery to retrieve JSON via AJAX</h1>
+
+      <a href="#" id="clickme">Get JSON Data</a>
+
+
+   </body>
+		
+</html>
