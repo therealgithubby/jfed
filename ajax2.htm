@@ -1,0 +1,66 @@
+<html>
+   <head>
+      <meta content = "text/html; charset = ISO-8859-1" http-equiv = "content-type">
+		
+      <a href="#" id="clickme">Get JSON Data</a>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      
+      <style>
+          th{ 
+              color:#fff;
+                  }
+      </style>
+
+      
+      
+<table class="table table-responsive table-hover table-bordered" id="list_table_json">
+   <thead>
+       <tr>
+           <th>Make</th>
+           <th>Model</th>
+           <th>Engine</th>
+           <th>Availability</th>
+           <th>Photo</th>
+       </tr>                   
+   </thead>
+</table>
+
+
+
+      <script type="text/javascript">
+$(document).ready(function(){
+    $.ajax({
+        url: "https://bitbucket.org/dacsoftware/recruitment-frontend-junior/raw/e824e5c44befb603535a33ea88a4888c92cf1042/data.json",
+        dataType: 'json',
+        type: 'get',
+        cache:false,
+        success: function(data){
+            /*console.log(data);*/
+            var event_data = '';
+            $.each(data.user, function(index, value){
+                /*console.log(value);*/
+                event_data += '<tr>';
+                event_data += '<td>'+value.make+'</td>';
+                event_data += '<td>'+value.model+'</td>';
+                event_data += '<td>'+value.engine+'</td>';
+                event_data += '<td>'+value.availability+'</td>';
+                event_data += '<td>'+value.photo+'</td>';
+                event_data += '</tr>';
+            });
+            $("#list_table_json").append(event_data);
+        },
+        error: function(d){
+            /*console.log("error");*/
+            alert("404. Please wait until the File is Loaded.");
+        }
+    });
+});
+</script>
+
+      
+
+   </body>
+		
+</html>
